@@ -1,14 +1,17 @@
 from fastapi.testclient import TestClient
+
 from src.main import app
 
 client = TestClient(app)
 
-def test_root():
+
+def test_root() -> None:
     response = client.get("/")
     assert response.status_code == 200
     assert response.json()["status"] == "healthy"
 
-def test_api_status():
+
+def test_api_status() -> None:
     response = client.get("/api/v1/status")
     assert response.status_code == 200
     assert response.json()["version"] == "0.1.0"
